@@ -6,4 +6,6 @@ use strict;
         password => 'lingr passowrd',
     },
     'YanchaUrl' => 'http://yancha.hachiojipm.org:3000',
+    'YanchaTag' => '#FROMLINGR',
+    'ExcludeFilterREGEXP' => '(^perl bot\:|^Github\:)',
 };

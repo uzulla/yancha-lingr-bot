@@ -17,8 +17,6 @@ my $fail_limit = 10;
 
 my $done = AnyEvent->condvar;
 
-my $tw_stream_listener;
-my $create_listener;
 my $listener_timer;
 my $set_timer;
 
@@ -26,13 +24,10 @@ my $get_yancha_auth_token;
 my $yancha_auth_token;
 my $post_yancha_message;
 
-#$post_yancha_message->("$tweet->{user}{screen_name}: $tweet->{text}");
-
 my $lingr = AnyEvent::Lingr->new(
     user     => $config->{Lingr}->{userid},
     password => $config->{Lingr}->{password},
 );
-
 
 # error handler
 $lingr->on_error(sub {
@@ -66,8 +61,10 @@ $lingr->on_event(sub {
     if (my $msg = $event->{message}) {
         my $str = sprintf "[%s] %s: %s\n",
             $msg->{room}, $msg->{nickname}, $msg->{text};
-        print $str;
-        $post_yancha_message->($str);
+        if($str !~ $config->{ExcludeFilterREGEXP}){
+            print $str;
+            $post_yancha_message->($str);
+        }
     }
 });
 
@@ -111,6 +108,7 @@ $get_yancha_auth_token = sub {
 $post_yancha_message = sub {
 	my $message = shift;
 	$message =~ s/#/＃/g;
+    $message .= " ".$config->{YanchaTag};
 	my $req = AnyEvent::HTTP::Request->new({
 	    method => 'GET',
 	    uri  => $config->{YanchaUrl}.'/api/post?token='.$yancha_auth_token.'&text='.uri_escape_utf8($message),
