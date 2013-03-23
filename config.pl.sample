@@ -7,5 +7,5 @@ use strict;
     },
     'YanchaUrl' => 'http://yancha.hachiojipm.org:3000',
     'YanchaTag' => '#FROMLINGR',
-    'ExcludeFilterREGEXP' => '(^perl bot\:|^Github\:)',
+    'ExcludeFilterREGEXP' => '(^\[perl_jp\] perl bot\:|^\[perl_jp\] Github\:)',
 };
