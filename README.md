@@ -1,6 +1,6 @@
-yancha twitter bot
+yancha lingr bot
 =====
 
-1. get tweet by twitter stream
+1. get chat from Lingr.
 2. post to yancha
 
