@@ -1,0 +1,9 @@
+use strict;
+
++{
+    'Lingr' => {
+        userid => 'lingr user id(email)',
+        password => 'lingr passowrd',
+    },
+    'YanchaUrl' => 'http://yancha.hachiojipm.org:3000',
+};
