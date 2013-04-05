@@ -1,5 +1,2 @@
 #!/bin/sh
-perl ./app.pl
-
-
-
+carton exec -- perl app.pl
